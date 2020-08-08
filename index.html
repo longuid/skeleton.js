@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="test/data1.js"></script>
+    <script src="libs/skeleton.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        html {
+            background: #333;
+        }
+        .wrap {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        select {
+            position: relative;
+            z-index: 1
+        }
+        canvas {
+            border: 5px solid #eee;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+<select id="type" name="type">
+    <option value="source-over">source-over</option>
+    <option value="source-in">source-in</option>
+    <option value="source-out">source-out</option>
+    <option value="source-atop">source-atop</option>
+    <option value="destination-over">destination-over</option>
+    <option value="destination-in">destination-in</option>
+    <option value="destination-out">destination-out</option>
+    <option value="destination-atop">destination-atop</option>
+    <option value="lighter">lighter</option>
+    <option value="copy">copy</option>
+    <option value="xor">xor</option>
+    <option value="multiply">multiply</option>
+    <option value="screen">screen</option>
+    <option value="overlay">overlay</option>
+    <option value="darken">darken</option>
+    <option value="lighten">lighten</option>
+    <option value="color-dodge">color-dodge</option>
+    <option value="color-burn">color-burn</option>
+    <option value="hard-light">hard-light</option>
+    <option value="soft-light">soft-light</option>
+    <option value="difference">difference</option>
+    <option value="exclusion">exclusion</option>
+    <option value="hue">hue</option>
+    <option value="saturation">saturation</option>
+    <option value="color">color</option>
+    <option value="luminosity">luminosity</option>
+</select>
+<div class="wrap">
+    <canvas width="375" height="1000" id="canvas"></canvas>
+</div>
+<script>
+    skeleton(document.getElementById('canvas'), data1)
+</script>
+</body>
+</html>
