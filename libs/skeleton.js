@@ -11,31 +11,64 @@ function rounded (ctx, x, y, w, h, r) {
     ctx.closePath()
 }
 
+let type = 'color-burn'
 
-function skeleton (canvas, data) {
+document.getElementById('type').addEventListener('change', e => {
+    type = e.target.value
+})
+
+
+function skeleton (canvas) {
     const ctx = canvas.getContext('2d')
-    let offset = 0
-    let step = 20
-
-    let type = 'color-burn'
-
-    document.getElementById('type').addEventListener('change', e => {
-        type = e.target.value
-    })
-
+    console.log(data1)
+    const layers1 = data1.filter(d => d.shimmer !== true)
+    const layers2 = data1.filter(d => d.shimmer === true)
+    console.log(layers2)
+    const sc = shadowCanvas(canvas, layers2)
 
     function render () {
         ctx.save()
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
-        // ctx.fillStyle = '#ffffff'
-        // ctx.fillRect(0, 0, canvas.width, canvas.height)
-        data1.forEach(d => {
+        ctx.fillStyle = '#f8f8f8'
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+        layers1.forEach(d => {
             rounded(ctx, d.x, d.y, d.width, d.height, d.radius)
             ctx.fillStyle = d.color
             ctx.fill()
         })
 
-        ctx.globalCompositeOperation = type
+        sc.render()
+        ctx.drawImage(sc.canvas, 0, 0, canvas.width, canvas.height)
+
+        ctx.restore()
+        requestAnimationFrame(render)
+    }
+
+    requestAnimationFrame(render)
+}
+
+function shadowCanvas (canvas, data) {
+    const shadowCanvas = document.createElement('canvas')
+    shadowCanvas.width = canvas.width
+    shadowCanvas.height = canvas.height
+
+    shadowCanvas.style.cssText = 'display:none'
+    document.body.appendChild(shadowCanvas)
+
+    const ctx = shadowCanvas.getContext('2d')
+
+    let offset = 0
+    let step = 20
+
+    function render () {
+        ctx.save()
+        ctx.clearRect(0, 0, shadowCanvas.width, shadowCanvas.height)
+        data.forEach(d => {
+            rounded(ctx, d.x, d.y, d.width, d.height, d.radius)
+            ctx.fillStyle = d.color
+            ctx.fill()
+        })
+
+        ctx.globalCompositeOperation = 'source-in'
 
         if (offset > 1000) {
             offset = -1000
@@ -49,11 +82,11 @@ function skeleton (canvas, data) {
         ctx.fillRect(0, 0, canvas.width, canvas.height)
         offset += step
 
-        // ctx.globalCompositeOperation = 'destination-out'
         ctx.restore()
-
-        requestAnimationFrame(render)
     }
 
-    requestAnimationFrame(render)
+    return {
+        canvas: shadowCanvas,
+        render
+    }
 }

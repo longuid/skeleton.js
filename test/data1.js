@@ -15,6 +15,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 70,
         "y": 341,
         "width": 78,
@@ -29,6 +30,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 70,
         "y": 426,
         "width": 194,
@@ -43,6 +45,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 35,
         "y": 377,
         "width": 280,
@@ -57,6 +60,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 35,
         "y": 336,
         "width": 24,
@@ -71,6 +75,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 35,
         "y": 421,
         "width": 24,
@@ -99,6 +104,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 70,
         "y": 496,
         "width": 78,
@@ -113,6 +119,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 35,
         "y": 630,
         "width": 305,
@@ -127,6 +134,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 35,
         "y": 575,
         "width": 128,
@@ -141,6 +149,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 175,
         "y": 575,
         "width": 158,
@@ -155,6 +164,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 35,
         "y": 535,
         "width": 114,
@@ -169,6 +179,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 159,
         "y": 535,
         "width": 159,
@@ -183,6 +194,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 35,
         "y": 491,
         "width": 24,
@@ -211,6 +223,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 35,
         "y": 55,
         "width": 56,
@@ -225,6 +238,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 35,
         "y": 140,
         "width": 185,
@@ -239,6 +253,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 35,
         "y": 84,
         "width": 217,
@@ -267,6 +282,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 52,
         "y": 279,
         "width": 72,
@@ -281,6 +297,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 264,
         "y": 279,
         "width": 82,
@@ -295,6 +312,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 172,
         "y": 279,
         "width": 46,
@@ -309,6 +327,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 24,
         "y": 277,
         "width": 18,
@@ -323,6 +342,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 236,
         "y": 277,
         "width": 18,
@@ -337,6 +357,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 144,
         "y": 277,
         "width": 18,
@@ -365,6 +386,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 52,
         "y": 853,
         "width": 48,
@@ -379,6 +401,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 164,
         "y": 853,
         "width": 48,
@@ -393,6 +416,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 276,
         "y": 853,
         "width": 48,
@@ -407,6 +431,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 36,
         "y": 872,
         "width": 80,
@@ -421,6 +446,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 35,
         "y": 749,
         "width": 305,
@@ -435,6 +461,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 148,
         "y": 872,
         "width": 80,
@@ -449,6 +476,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 260,
         "y": 872,
         "width": 80,
@@ -463,6 +491,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 61,
         "y": 812,
         "width": 30,
@@ -477,6 +506,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 173,
         "y": 812,
         "width": 30,
@@ -491,6 +521,7 @@ const data1 = [
     },
     {
         "_class": 1,
+        "shimmer": true,
         "x": 285,
         "y": 812,
         "width": 30,
