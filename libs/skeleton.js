@@ -40,10 +40,10 @@ function toRGB (color) {
 
 function skeleton (canvas, data) {
     const ctx = canvas.getContext('2d')
+    data = normalizeData(data)
     const layers1 = data.filter(d => d.shimmer !== true)
     const layers2 = data.filter(d => d.shimmer === true)
     const sc = shadowCanvas(canvas, layers2)
-    data = normalizeData(data)
 
     function render () {
         delayFrame++
@@ -53,7 +53,7 @@ function skeleton (canvas, data) {
         const layers = isShimmer ? layers1 : data
         layers.forEach((d, i) => {
             rounded(ctx, d.x, d.y, d.width, d.height, d.radius)
-            ctx.fillStyle = getRGBA(d, i)
+            ctx.fillStyle =  `rgba(${d.rgb}, ${d.a * d.alphaDelay / 100})`
             ctx.fill()
         })
 
@@ -62,10 +62,20 @@ function skeleton (canvas, data) {
             ctx.drawImage(sc.canvas, 0, 0, canvas.width, canvas.height)
         }
         ctx.restore()
-        requestAnimationFrame(render)
     }
 
-    requestAnimationFrame(render)
+    anime({
+        targets: data,
+        alphaDelay: 100,
+        easing: 'easeInOutQuad',
+        duration: 500,
+        delay: anime.stagger(50),
+        direction: 'alternate',
+        loop: true,
+        update () {
+            render()
+        }
+    })
 }
 
 function shadowCanvas (canvas, data) {
@@ -81,7 +91,7 @@ function shadowCanvas (canvas, data) {
         ctx.clearRect(0, 0, shadowCanvas.width, shadowCanvas.height)
         data.forEach(d => {
             rounded(ctx, d.x, d.y, d.width, d.height, d.radius)
-            ctx.fillStyle = d.color
+            ctx.fillStyle = `rgba(${d.rgb}, ${d.a * d.alphaDelay / 100})`
             ctx.fill()
         })
 
@@ -113,6 +123,9 @@ function shadowCanvas (canvas, data) {
 
 function normalizeData (data) {
     return data.map((d, i) => {
+        if (d.color === '#00000005') {
+            d.shimmer = true
+        }
         if (d.color) {
             d.rgb = toRGB(d.color)
         }
@@ -121,20 +134,9 @@ function normalizeData (data) {
         } else {
             d.a = 1
         }
-        d.alphaDelay = i * 2
-        d.alphaFrame = 100
+        d.alphaDelay = 0
         return d
     })
-}
-
-function getRGBA(layer, i) {
-    let a = delayFrame < layer.alphaDelay ? 0 : layer.a * (1 / layer.alphaFrame)
-    if (a < layer.a) {
-        layer.alphaFrame--
-    } else {
-        a = layer.a
-    }
-    return `rgba(${layer.rgb}, ${a})`
 }
 
 function rounded (ctx, x, y, w, h, r) {
