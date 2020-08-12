@@ -44,11 +44,12 @@ function skeleton (canvas, data) {
     const layers1 = data.filter(d => d.shimmer !== true)
     const layers2 = data.filter(d => d.shimmer === true)
     const sc = shadowCanvas(canvas, layers2)
+    let complete = false
 
     function render () {
         delayFrame++
         ctx.save()
-        ctx.fillStyle = '#f8f8f8'
+        ctx.fillStyle = '#ffffff'
         ctx.fillRect(0, 0, canvas.width, canvas.height)
         const layers = isShimmer ? layers1 : data
         layers.forEach((d, i) => {
@@ -62,18 +63,39 @@ function skeleton (canvas, data) {
             ctx.drawImage(sc.canvas, 0, 0, canvas.width, canvas.height)
         }
         ctx.restore()
+        if (complete) {
+            requestAnimationFrame(render)
+        }
     }
 
     anime({
         targets: data,
         alphaDelay: 100,
-        easing: 'easeInOutQuad',
-        duration: 500,
+        easing: 'cubicBezier(0.000, 1, 0.940, 0.965)',
+        duration: 800,
+        y: '-=80',
         delay: anime.stagger(50),
-        direction: 'alternate',
-        loop: true,
         update () {
             render()
+        },
+        complete () {
+            complete = true
+            requestAnimationFrame(render)
+
+            setTimeout(() => {
+                complete = false
+                anime({
+                    targets: data,
+                    alphaDelay: 0,
+                    easing: 'cubicBezier(0.000, 1, 0.940, 0.965)',
+                    duration: 300,
+                    y: '-=20',
+                    delay: anime.stagger(20),
+                    update () {
+                        render()
+                    }
+                })
+            }, 3000)
         }
     })
 }
@@ -123,9 +145,6 @@ function shadowCanvas (canvas, data) {
 
 function normalizeData (data) {
     return data.map((d, i) => {
-        if (d.color === '#00000005') {
-            d.shimmer = true
-        }
         if (d.color) {
             d.rgb = toRGB(d.color)
         }
