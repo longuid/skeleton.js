@@ -2,9 +2,51 @@ const data1 = [
     {
         "_class": 1,
         "x": 15,
+        "y": 24,
+        "width": 345,
+        "height": 230,
+        "radius": 10,
+        "color": "#ffffff",
+        "ehid": "",
+        "clickable": {
+            "enabled": false
+        },
+        "delay": 0
+    },
+    {
+        "_class": 1,
+        "x": 15,
         "y": 318,
         "width": 345,
         "height": 145,
+        "radius": 10,
+        "color": "#ffffff",
+        "ehid": "",
+        "clickable": {
+            "enabled": false
+        },
+        "delay": 0
+    },
+    {
+        "_class": 1,
+        "x": 15,
+        "y": 473,
+        "width": 345,
+        "height": 246,
+        "radius": 10,
+        "color": "#ffffff",
+        "ehid": "",
+        "clickable": {
+            "enabled": false
+        },
+        "delay": 0
+    },
+    {
+        "_class": 1,
+        "x": 15,
+        "y": 729,
+        "width": 345,
+        "height": 190,
         "radius": 10,
         "color": "#ffffff",
         "ehid": "",
@@ -82,20 +124,6 @@ const data1 = [
         "height": 24,
         "radius": 12,
         "color": "#f8f8f8",
-        "ehid": "",
-        "clickable": {
-            "enabled": false
-        },
-        "delay": 0
-    },
-    {
-        "_class": 1,
-        "x": 15,
-        "y": 473,
-        "width": 345,
-        "height": 246,
-        "radius": 10,
-        "color": "#ffffff",
         "ehid": "",
         "clickable": {
             "enabled": false
@@ -201,20 +229,6 @@ const data1 = [
         "height": 24,
         "radius": 12,
         "color": "#f8f8f8",
-        "ehid": "",
-        "clickable": {
-            "enabled": false
-        },
-        "delay": 0
-    },
-    {
-        "_class": 1,
-        "x": 15,
-        "y": 24,
-        "width": 345,
-        "height": 230,
-        "radius": 10,
-        "color": "#ffffff",
         "ehid": "",
         "clickable": {
             "enabled": false
@@ -364,20 +378,6 @@ const data1 = [
         "height": 18,
         "radius": 9,
         "color": "#f2f2f2",
-        "ehid": "",
-        "clickable": {
-            "enabled": false
-        },
-        "delay": 0
-    },
-    {
-        "_class": 1,
-        "x": 15,
-        "y": 729,
-        "width": 345,
-        "height": 190,
-        "radius": 10,
-        "color": "#ffffff",
         "ehid": "",
         "clickable": {
             "enabled": false
