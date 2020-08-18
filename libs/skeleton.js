@@ -8,7 +8,6 @@ let step = parseFloat($step.value)
 let isShimmer = $shimmer.checked
 let colors = $colorControls.map(d => d.value || '#000000').concat($colorControls[0].value).map(d => toRGB(d))
 let offset = 0
-let delayFrame = 0
 
 $type.addEventListener('change', e => {
     type = e.target.value
@@ -20,12 +19,12 @@ $shimmer.addEventListener('change', e => {
     isShimmer = e.target.checked
 })
 $colorControls.forEach((el, i) => {
-  el.addEventListener('input', e => {
-      colors[i] = toRGB(e.target.value)
-      if (i === 0) {
-          colors[colors.length - 1] = colors[0]
-      }
-  })
+    el.addEventListener('input', e => {
+        colors[i] = toRGB(e.target.value)
+        if (i === 0) {
+            colors[colors.length - 1] = colors[0]
+        }
+    })
 })
 
 function toRGB (color) {
@@ -37,21 +36,30 @@ function toRGB (color) {
     return r.join(',')
 }
 
+function copy (data) {
+    return JSON.parse(JSON.stringify(data))
+}
+
 
 function skeleton (canvas, data) {
     const ctx = canvas.getContext('2d')
-    data = normalizeData(data)
-    const layers1 = data.filter(d => d.shimmer !== true)
-    const layers2 = data.filter(d => d.shimmer === true)
-    const sc = shadowCanvas(canvas, layers2)
+    let layers = []
+    let renderLayers = {}
     let complete = false
 
+    const sc = shadowCanvas(canvas, renderLayers)
+
+    function reset () {
+        layers = normalizeData(copy(data))
+        renderLayers.layers1 = layers.filter(d => d.shimmer !== true)
+        renderLayers.layers2 = layers.filter(d => d.shimmer === true)
+    }
+
     function render () {
-        delayFrame++
         ctx.save()
         ctx.fillStyle = '#ffffff'
         ctx.fillRect(0, 0, canvas.width, canvas.height)
-        const layers = isShimmer ? layers1 : data
+        const layers = isShimmer ? renderLayers.layers1 : layers
         layers.forEach((d, i) => {
             rounded(ctx, d.x, d.y, d.width, d.height, d.radius)
             ctx.fillStyle =  `rgba(${d.rgb}, ${d.a * d.alphaDelay / 100})`
@@ -68,36 +76,52 @@ function skeleton (canvas, data) {
         }
     }
 
-    anime({
-        targets: data,
-        alphaDelay: 100,
-        easing: 'cubicBezier(0.000, 1, 0.940, 0.965)',
-        duration: 800,
-        y: '-=80',
-        delay: anime.stagger(50),
-        update () {
-            render()
-        },
-        complete () {
-            complete = true
-            requestAnimationFrame(render)
+    function show () {
+        anime({
+            targets: layers,
+            alphaDelay: 100,
+            easing: 'cubicBezier(0.000, 1, 0.940, 0.965)',
+            duration: 500,
+            // y: '-=80',
+            delay: anime.stagger(50, { easing: 'easeOutQuad' }),
+            update () {
+                render()
+            },
+            complete () {
+                complete = true
+                requestAnimationFrame(render)
 
-            setTimeout(() => {
-                complete = false
-                anime({
-                    targets: data,
-                    alphaDelay: 0,
-                    easing: 'cubicBezier(0.000, 1, 0.940, 0.965)',
-                    duration: 300,
-                    y: '-=20',
-                    delay: anime.stagger(20),
-                    update () {
-                        render()
-                    }
-                })
-            }, 3000)
-        }
-    })
+                setTimeout(() => {
+                    complete = false
+                    hide()
+                }, 3000)
+            }
+        })
+    }
+
+    function hide () {
+        anime({
+            targets: layers,
+            alphaDelay: 0,
+            duration: 300,
+            easing: 'cubicBezier(0.000, 1, 0.940, 0.965)',
+            delay: anime.stagger(20, { easing: 'easeOutQuad' }),
+            update () {
+                render()
+            },
+            complete () {
+                complete = true
+                setTimeout(() => {
+                    complete = false
+                    reset()
+                    show()
+                }, 1000)
+            }
+        })
+    }
+
+    reset()
+    show()
 }
 
 function shadowCanvas (canvas, data) {
@@ -111,7 +135,7 @@ function shadowCanvas (canvas, data) {
     function render () {
         ctx.save()
         ctx.clearRect(0, 0, shadowCanvas.width, shadowCanvas.height)
-        data.forEach(d => {
+        data.layers2.forEach(d => {
             rounded(ctx, d.x, d.y, d.width, d.height, d.radius)
             ctx.fillStyle = `rgba(${d.rgb}, ${d.a * d.alphaDelay / 100})`
             ctx.fill()

@@ -226,6 +226,6 @@ const data4 = [
 ].map(d => {
   d.shimmer = true
   // d.color = '#eeeeee'
-  d.y += 80
+  // d.y += 80
   return d
 })

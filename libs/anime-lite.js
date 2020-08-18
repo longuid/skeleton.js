@@ -1,12 +1,3 @@
-/*
- * anime.js v3.2.0
- * (c) 2020 Julian Garnier
- * Released under the MIT license
- * animejs.com
- */
-
-'use strict'
-
 // Defaults
 
 var defaultInstanceSettings = {
@@ -34,7 +25,6 @@ var defaultTweenSettings = {
 // Caching
 
 var cache = {
-  CSS: {},
   springs: {}
 }
 
